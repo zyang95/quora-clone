@@ -32,9 +32,10 @@
 		<!-- Right column -->
 		<% uniqueId = "question-#{row.id}" %>
 		<div>
+
 			<!-- First row: Header and buttons -->
 			<div>
-				<span>Username: <%= row.user_id.nil? ? '&lt;nil&gt;' : User.find(row.user_id).full_name %>
+				<span>Username: <a href="/profile/<%= row.user_id%>"><%= row.user_id.nil? ? '&lt;nil&gt;' : User.find(row.user_id).full_name %></a>
 		
 				<% if session[:user_id] == row.user.id %>
 					<input type="hidden" value="<%= uniqueId %>">
