@@ -33,10 +33,10 @@
       };
 
       // Redirect to main page if asking a question
-      var handler = (window.location.pathname === '/')
-        ? serverAPI('/question_ask').then(function () { $askForm.hide(); })
-        : serverAPI('/question_ask', redirect);
-      handler(ev);
+      (window.location.pathname === '/')
+        ? serverAPI('/question_ask')(ev).then(function () { $askForm.hide(); })
+        : serverAPI('/question_ask', redirect)(ev);
+      //handler(ev);
     });
 
     // Separating into own structure to support adding/removing handles
@@ -95,10 +95,13 @@
               addClickers(); // Added elements don't have the click handler
             };
 
-        return(jQuery
+        var a= 
+        (jQuery
           .post(link, { args: hidden, content: $textarea.val() }, success)
           .fail(console.error)
         );
+        console.log(a);
+        return a;
       });
     }
   });
